@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import{BrowserRouter, Switch, Route} from 'react-router-dom';
+import NavBar from './components/navBar';
+
+import {collection, getDocs} from 'firebase/firestore'
+import {getData} from './firebase'
+import Home from './pages/home';
+import ItemContainer from './components/itemContainer';
+import ItemDetailContainer from './components/itemDetailContainer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <NavBar/>
+      <Switch>
+        <Route exact path="/">
+          <Home/>
+        </Route>
+        <Route exact path="/productos">
+          <ItemContainer/>
+        </Route>
+        <Route exact path="/producto-detalle/:id">
+          <ItemDetailContainer/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+
   );
 }
 
